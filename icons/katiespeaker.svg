@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Hexagon base -->
+  <path d="M100 10 L185 55 L185 145 L100 190 L15 145 L15 55 Z" fill="#0C3547"/>
+  <!-- Left side lighter panel -->
+  <path d="M100 190 L15 145 L15 55 L100 100 Z" fill="#1A5276"/>
+  <!-- Right side darker panel -->
+  <path d="M100 190 L185 145 L185 55 L100 100 Z" fill="#0C3547"/>
+
+  <!-- Data bars rising from center -->
+  <!-- Bar 1 (leftmost) -->
+  <rect x="52" y="72" width="6" height="40" rx="3" fill="#4A90D9"/>
+  <!-- Bar 2 -->
+  <rect x="64" y="58" width="6" height="54" rx="3" fill="#5BA3EC"/>
+  <!-- Bar 3 -->
+  <rect x="76" y="48" width="6" height="64" rx="3" fill="#6BB5F5"/>
+  <!-- Bar 4 (center-left) -->
+  <rect x="88" y="38" width="6" height="74" rx="3" fill="#7CC5FF"/>
+  <!-- Bar 5 (center) -->
+  <rect x="100" y="30" width="6" height="82" rx="3" fill="#7CC5FF"/>
+  <!-- Bar 6 (center-right) -->
+  <rect x="112" y="42" width="6" height="70" rx="3" fill="#6BB5F5"/>
+  <!-- Bar 7 -->
+  <rect x="124" y="55" width="6" height="57" rx="3" fill="#5BA3EC"/>
+  <!-- Bar 8 (rightmost) -->
+  <rect x="136" y="65" width="6" height="47" rx="3" fill="#4A90D9"/>
+
+  <!-- Connecting data line with nodes -->
+  <polyline points="55,95 67,82 79,90 91,75 103,68 115,78 127,85 139,80"
+    stroke="#4A90D9" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Data point circles -->
+  <circle cx="55" cy="95" r="5" fill="#4A90D9" stroke="white" stroke-width="1.5"/>
+  <circle cx="79" cy="90" r="5" fill="#5BA3EC" stroke="white" stroke-width="1.5"/>
+  <circle cx="103" cy="68" r="5" fill="#7CC5FF" stroke="white" stroke-width="1.5"/>
+  <circle cx="127" cy="85" r="5" fill="#5BA3EC" stroke="white" stroke-width="1.5"/>
+  <circle cx="139" cy="80" r="5" fill="#4A90D9" stroke="white" stroke-width="1.5"/>
+
+  <!-- Open envelope/mail shape at bottom -->
+  <path d="M45 115 L100 145 L155 115 L155 155 L45 155 Z" fill="#0E4D6B" stroke="#4A90D9" stroke-width="1"/>
+  <path d="M45 115 L100 145 L155 115" fill="none" stroke="#7CC5FF" stroke-width="2" stroke-linejoin="round"/>
+</svg>

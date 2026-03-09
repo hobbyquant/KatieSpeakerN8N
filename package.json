@@ -1,0 +1,56 @@
+{
+	"name": "n8n-nodes-katiespeaker",
+	"version": "0.3.0",
+	"description": "n8n community node for Katie Speaker - publish spoken notifications to Katie Speaker devices",
+	"keywords": [
+		"n8n-community-node-package",
+		"n8n",
+		"katie-speaker",
+		"text-to-speech",
+		"notifications",
+		"iot"
+	],
+	"license": "MIT",
+	"homepage": "https://katiespeaker.com",
+	"author": {
+		"name": "Katie Speaker",
+		"url": "https://katiespeaker.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/hobbyquant/Katien8n.git"
+	},
+	"engines": {
+		"node": ">=22.0"
+	},
+	"main": "dist/nodes/KatieSpeaker/KatieSpeaker.node.js",
+	"scripts": {
+		"build": "tsc && node -e \"const fs=require('fs');fs.mkdirSync('dist/icons',{recursive:true});fs.copyFileSync('icons/katiespeaker.svg','dist/nodes/KatieSpeaker/katiespeaker.svg');fs.copyFileSync('icons/katiespeaker.svg','dist/icons/katiespeaker.svg');\"",
+		"dev": "npx @n8n/node-cli dev",
+		"lint": "npx @n8n/node-cli lint",
+		"lint:fix": "npx @n8n/node-cli lint --fix",
+		"release": "release-it"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"credentials": [
+			"dist/credentials/KatieSpeakerApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/KatieSpeaker/KatieSpeaker.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "latest",
+		"eslint": "^9.0.0",
+		"prettier": "^3.0.0",
+		"release-it": "^19.0.0",
+		"typescript": "^5.0.0"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}
