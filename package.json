@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-katiespeaker",
-	"version": "0.4.1",
+	"version": "0.4.2",
 	"description": "n8n community node for Katie Speaker - publish spoken notifications to Katie Speaker devices",
 	"keywords": [
 		"n8n-community-node-package",

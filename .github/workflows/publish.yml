@@ -48,16 +48,20 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 'lts/*'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        # Using `npm install` rather than `npm ci` because the lock file
+        # is generated on Windows and omits a `node_modules/fsevents` entry
+        # (darwin-only optional dep), which makes `npm ci` strict-mode fail
+        # on the Linux runner. `npm install` reconciles instead of erroring.
+        run: npm install --no-audit --no-fund
 
       - name: Release
         # `n8n-node release` runs lint, build, then publishes with provenance.
