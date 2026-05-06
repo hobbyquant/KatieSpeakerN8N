@@ -37,12 +37,6 @@ export class KatieSpeaker implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Publish Message',
-						value: 'publish',
-						description: 'Publish a message to your Katie Speaker channel',
-						action: 'Publish a message',
-					},
-					{
 						name: 'Broadcast Message',
 						value: 'broadcast',
 						description:
@@ -54,6 +48,12 @@ export class KatieSpeaker implements INodeType {
 						value: 'getFilters',
 						description: 'Get aggregated subscription filter rules for your channel',
 						action: 'Get subscriber filters',
+					},
+					{
+						name: 'Publish Message',
+						value: 'publish',
+						description: 'Publish a message to your Katie Speaker channel',
+						action: 'Publish a message',
 					},
 					{
 						name: 'Should Publish',
@@ -200,7 +200,6 @@ export class KatieSpeaker implements INodeType {
 
 		const credentials = await this.getCredentials('katieSpeakerApi');
 		const baseUrl = credentials.baseUrl as string;
-		const channelApiKey = credentials.channelApiKey as string;
 
 		const operation = this.getNodeParameter('operation', 0) as string;
 
@@ -215,7 +214,6 @@ export class KatieSpeaker implements INodeType {
 					};
 
 					const body: Record<string, unknown> = {
-						channel_apikey: channelApiKey,
 						message,
 					};
 
@@ -251,18 +249,23 @@ export class KatieSpeaker implements INodeType {
 						json: true,
 					};
 
-					const response = await this.helpers.httpRequest(options);
+					const response = await this.helpers.httpRequestWithAuthentication.call(
+						this,
+						'katieSpeakerApi',
+						options,
+					);
 					returnData.push({ json: response as INodeExecutionData['json'], pairedItem: i });
 				} else if (operation === 'getFilters') {
 					const options: IHttpRequestOptions = {
 						method: 'GET',
 						url: `${baseUrl}/v1/messaging/subscriber-filters`,
-						qs: {
-							channel_apikey: channelApiKey,
-						},
 					};
 
-					const response = await this.helpers.httpRequest(options);
+					const response = await this.helpers.httpRequestWithAuthentication.call(
+						this,
+						'katieSpeakerApi',
+						options,
+					);
 					returnData.push({ json: response as INodeExecutionData['json'], pairedItem: i });
 				} else if (operation === 'shouldPublish') {
 					const metaParam = this.getNodeParameter('meta', i) as {
@@ -277,16 +280,16 @@ export class KatieSpeaker implements INodeType {
 						}
 					}
 
-					// Fetch subscriber filters
 					const filtersOptions: IHttpRequestOptions = {
 						method: 'GET',
 						url: `${baseUrl}/v1/messaging/subscriber-filters`,
-						qs: {
-							channel_apikey: channelApiKey,
-						},
 					};
 
-					const filtersResponse = (await this.helpers.httpRequest(filtersOptions)) as {
+					const filtersResponse = (await this.helpers.httpRequestWithAuthentication.call(
+						this,
+						'katieSpeakerApi',
+						filtersOptions,
+					)) as {
 						has_unfiltered_subscribers: boolean;
 						filters: Array<{ field: string; op: string; value: unknown }>;
 					};

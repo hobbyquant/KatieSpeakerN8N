@@ -37,6 +37,12 @@ export class KatieSpeakerApi implements ICredentialType {
 	authenticate: IAuthenticateGeneric = {
 		type: 'generic',
 		properties: {
+			// API requires the key in the query string for GET routes and in
+			// the body for POST routes; injecting both covers all operations
+			// without manual handling in the node.
+			qs: {
+				channel_apikey: '={{$credentials.channelApiKey}}',
+			},
 			body: {
 				channel_apikey: '={{$credentials.channelApiKey}}',
 			},
@@ -48,9 +54,6 @@ export class KatieSpeakerApi implements ICredentialType {
 			baseURL: '={{$credentials.baseUrl}}',
 			url: '/v1/messaging/subscriber-filters',
 			method: 'GET',
-			qs: {
-				channel_apikey: '={{$credentials.channelApiKey}}',
-			},
 		},
 	};
 }

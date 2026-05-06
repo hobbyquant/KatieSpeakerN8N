@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-katiespeaker",
-	"version": "0.3.2",
+	"version": "0.4.0",
 	"description": "n8n community node for Katie Speaker - publish spoken notifications to Katie Speaker devices",
 	"keywords": [
 		"n8n-community-node-package",
@@ -26,11 +26,12 @@
 	},
 	"main": "dist/nodes/KatieSpeaker/KatieSpeaker.node.js",
 	"scripts": {
-		"build": "tsc && node -e \"const fs=require('fs');fs.mkdirSync('dist/icons',{recursive:true});fs.copyFileSync('icons/katiespeaker.svg','dist/nodes/KatieSpeaker/katiespeaker.svg');fs.copyFileSync('icons/katiespeaker.svg','dist/icons/katiespeaker.svg');\"",
-		"dev": "npx @n8n/node-cli dev",
-		"lint": "npx @n8n/node-cli lint",
-		"lint:fix": "npx @n8n/node-cli lint --fix",
-		"release": "release-it"
+		"build": "n8n-node build && node -e \"const fs=require('fs');fs.mkdirSync('dist/icons',{recursive:true});fs.copyFileSync('icons/katiespeaker.svg','dist/icons/katiespeaker.svg');\"",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
 	},
 	"files": [
 		"dist"
@@ -45,7 +46,7 @@
 		]
 	},
 	"devDependencies": {
-		"@n8n/node-cli": "latest",
+		"@n8n/node-cli": "^0.29.0",
 		"eslint": "^9.0.0",
 		"prettier": "^3.0.0",
 		"release-it": "^19.0.0",
